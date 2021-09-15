@@ -1,6 +1,6 @@
 pyrogram
 tgcrypto
-requests
-parse-torrent-name
+music_tag
+Pillow
 psycopg2-binary
 sqlalchemy==1.3.23
