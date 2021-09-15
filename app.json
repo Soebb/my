@@ -1,16 +1,5 @@
 {
-  "name": "MovieChannelManager",
-  "description": "Telegram movies caption bot. Create your Fork now.",
-  "keywords": [
-    "telegram",
-    "best",
-    "auto",
-    "caption" 
-  ],
-  "success_url": "https://github.com/Ts-Bots/AutoCaption-Ts_Bot-Clone",
-  "website": "https://github.com/Ts-Bots/AutoCaption-Ts_Bot-Clone",
-  "repository": "https://github.com/Ts-Bots/AutoCaption-Ts_Bot-Clone",
-  "logo": "https://telegra.ph/file/eee1877ba8a1e7077b2a8.jpg",
+  "name": "MusicTagEditor",
   "env": {
     "WEBHOOK": {
       "description": "Setting this to ANYTHING will enable webhooks when in env mode",
@@ -27,11 +16,6 @@
     "API_HASH": {
       "description": "Get this value from https://my.telegram.org",
       "value": ""
-    },
-    "OMDB_API_KEY": {
-      "description": "Your OMBD API KEY, Fill if you want to generate a imdb poster of movie in autofilter.",
-      "value": "",
-      "required": false
     }
   },
   "addons": [
