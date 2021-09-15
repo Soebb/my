@@ -25,76 +25,41 @@ SESSION = start()
 
 INSERTION_LOCK = threading.RLock()
 
-class custom_button(BASE):
-    __tablename__ = "button"
+class custom_mode(BASE):
+    __tablename__ = "mode"
     id = Column(Integer, primary_key=True)
-    button = Column(String)
+    mode = Column(String)
 
-    def __init__(self, id, button):
+    def __init__(self, id, mode):
         self.id = id
-        self.button = button
+        self.mode = mode
 
-custom_button.__table__.create(checkfirst=True)
+custom_mode.__table__.create(checkfirst=True)
 
-class custom_caption(BASE):
-    __tablename__ = "caption"
-    id = Column(Integer, primary_key=True)
-    caption = Column(String)
-    
-    def __init__(self, id, caption):
-        self.id = id
-        self.caption = caption
 
-custom_caption.__table__.create(checkfirst=True)
-
-async def update_caption(id, caption):
+async def update_mode(id, mode):
     with INSERTION_LOCK:
-        cap = SESSION.query(custom_caption).get(id)
-        if not cap:
-            cap = custom_caption(id, caption)
-            SESSION.add(cap)
+        mod = SESSION.query(custom_mode).get(id)
+        if not mod:
+            mod = custom_caption(id, mode)
+            SESSION.add(mod)
             SESSION.flush()
         else:
-            SESSION.delete(cap)
-            cap = custom_caption(id, caption)
-            SESSION.add(cap)
+            SESSION.delete(mod)
+            mod = custom_mode(id, mode)
+            SESSION.add(mod)
         SESSION.commit()
 
-async def del_caption(id):
+async def del_mode(id):
     with INSERTION_LOCK:
-        msg = SESSION.query(custom_caption).get(id)
+        msg = SESSION.query(custom_mode).get(id)
         SESSION.delete(msg)
         SESSION.commit()
 
-async def get_caption(id):
+async def get_mode(id):
     try:
-        caption = SESSION.query(custom_caption).get(id)
-        return caption
+        mode = SESSION.query(custom_mode).get(id)
+        return mode
     finally:
         SESSION.close()
 
-async def update_button(id, button):
-    with INSERTION_LOCK:
-        btn = SESSION.query(custom_button).get(id)
-        if not btn:
-            btn = custom_button(id, button)
-            SESSION.add(btn)
-            SESSION.flush()
-        else:
-            SESSION.delete(btn)
-            btn = custom_button(id, button)
-            SESSION.add(btn)
-        SESSION.commit()
-
-async def del_button(id):
-    with INSERTION_LOCK:
-        msg = SESSION.query(custom_button).get(id)
-        SESSION.delete(msg)
-        SESSION.commit()
-
-async def get_button(id):
-    try:
-        button = SESSION.query(custom_button).get(id)
-        return button
-    finally:
-        SESSION.close()
